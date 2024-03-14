@@ -21,10 +21,10 @@
 // #define ACTUATOR_NODE
 #define SENSOR_NODE
 #define SHT21_EN
-#define MHZ19_EN
+// #define MHZ19_EN
 
 //#define BH1750_EN
-#define MAX9814_EN
+//#define MAX9814_EN
 
 //#define GP2Y1010AU0F_EN
 
