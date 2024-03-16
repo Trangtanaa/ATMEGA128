@@ -39,7 +39,7 @@ void setup()
   t.every(T_READ_MOTION, readMotion, (void *)0);
 #endif
   t.every(T_SENSOR_DATA, sendDataEnv, (void *)(&nodeID));
-  ledDebug();
+  
 #endif
 
   // ready
@@ -51,7 +51,7 @@ void loop()
 {
 
   t.update();
-//   if (nodeID == 0)
+//   if (nodeID != 0)
 //   {
     
 //     t.update(); // update timer

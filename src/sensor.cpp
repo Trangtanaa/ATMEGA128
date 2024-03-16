@@ -34,8 +34,8 @@ void sensorInit()
 
 #endif
 #ifdef BH1750_EN
-    //while (!bh1750.begin(BH1750::CONTINUOUS_HIGH_RES_MODE))
-    //    ledDebug();
+    while (!bh1750.begin(BH1750::CONTINUOUS_HIGH_RES_MODE))
+       ledDebug();
 #endif
 #ifdef MAX9814_EN
     pinMode(MAX9814_OUT_PIN, INPUT);
@@ -56,6 +56,7 @@ void sensorInit()
 #ifdef OLED_EN
 
 #endif
+ledDebug();
 };
 
 /**
@@ -128,6 +129,7 @@ unsigned int readBH1750()
             bh1750.setMTreg(138);
         }
     }
+    light = bh1750.readLightLevel();
     return light;
 }
 
@@ -238,7 +240,7 @@ int MOTION()
  */
 void sendDataEnv(void *context)
 {
-    if (Serial.available())
+    if (!Serial.available())
     {
         
         StaticJsonDocument<SIZE_OF_JSON> doc;
@@ -317,5 +319,10 @@ void sendDataEnv(void *context)
 #endif
         serializeJson(doc, Serial);
         ledDebug();
+    }
+    else
+    {
+      while (Serial.available() > 0)
+        Serial.read(); // Flush all bytes in the "link" serial port buffer
     }
 }
